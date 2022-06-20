@@ -1,0 +1,39 @@
+version: '3.4'
+
+networks:
+  sofomoapi-dev:
+    driver: bridge
+
+services:
+  sofomoapi:
+    image: sofomoapi:latest
+    depends_on:
+      - "postgres_image"
+    build:
+      context: .
+      dockerfile: Dockerfile
+    ports:
+      - "8000:80"
+    environment:
+      DB_CONNECTION_STRING: "Host=postgres_image;Port=5432;Username=postgres;Password=postgres;Database=sofomo-geosolution;"
+    networks:
+      - sofomoapi-dev
+  
+  postgres_image:
+    image: postgres:latest
+    ports:
+      - "5432"
+    restart: always
+    volumes:
+      - db_volume:/var/lib/postgresql/data
+      - ./dbscripts/seed.sql :/docker-entrypoint-initdb.d/seed.sql
+    environment:
+      POSTGRES_USER: "postgres"
+      POSTGRES_PASSWORD: "postgres"
+      POSTGRES_DB: "sofomo-geosolution"
+    networks:
+      - sofomoapi-dev
+
+volumes:
+  db_volume:
+      
