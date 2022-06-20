@@ -10,6 +10,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Sofomo.Network", "Sofomo.Ne
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Sofomo.Models", "Sofomo.Models\Sofomo.Models.csproj", "{A3925182-A7F6-4381-8D38-41B460C75A4C}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Sofomo.Tests", "Sofomo.Tests\Sofomo.Tests.csproj", "{C8A47A83-5B41-4B22-AD61-D22B592D82A7}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -36,5 +38,9 @@ Global
 		{A3925182-A7F6-4381-8D38-41B460C75A4C}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{A3925182-A7F6-4381-8D38-41B460C75A4C}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{A3925182-A7F6-4381-8D38-41B460C75A4C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{C8A47A83-5B41-4B22-AD61-D22B592D82A7}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C8A47A83-5B41-4B22-AD61-D22B592D82A7}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C8A47A83-5B41-4B22-AD61-D22B592D82A7}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C8A47A83-5B41-4B22-AD61-D22B592D82A7}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 EndGlobal

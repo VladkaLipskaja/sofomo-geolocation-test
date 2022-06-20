@@ -29,11 +29,8 @@ namespace Sofomo.Api
 
         public void Configure(IApplicationBuilder app)
         {
-            //if (app.Environment.IsDevelopment())
-            //{
             app.UseSwagger();
             app.UseSwaggerUI();
-            //}
 
             app.UseRouting();
             app.UseEndpoints(x => x.MapControllers());
@@ -47,12 +44,11 @@ namespace Sofomo.Api
             services.AddScoped<IRepository<GeolocationEntity>, Repository<GeolocationEntity>>();
         }
 
-        private const string DefaultConnectionKey = "DefaultConnection";
-        
         private void ConfigureDatabase(IServiceCollection services)
         {
+            var connectionString = Environment.GetEnvironmentVariable("DB_CONNECTION_STRING");
             services.AddDbContext<GeolocationDBContext>(options =>
-                options.UseNpgsql(Configuration.GetConnectionString(DefaultConnectionKey)));
+                options.UseNpgsql(connectionString));
         }
 
         private void ConfigureHttpClient(IServiceCollection services)

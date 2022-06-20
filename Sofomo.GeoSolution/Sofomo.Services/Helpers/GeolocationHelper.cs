@@ -1,5 +1,4 @@
 using System.Net;
-using System.Text.Json;
 using AutoMapper;
 using Microsoft.Extensions.Options;
 using Newtonsoft.Json;
@@ -24,32 +23,26 @@ namespace Sofomo.Services
 
         public async Task<GeolocationModel> GetGeolocationAsync(string ip)
         {
-           // var response = await GetIPStackResponseAsync(ip);
-           var response =
-               "{\"ip\": \"40.65.205.118\", \"type\": \"ipv4\", \"continent_code\": \"NA\", \"continent_name\": \"North America\", \"country_code\": \"US\", \"country_name\": \"United States\", \"region_code\": \"VA\", \"region_name\": \"Virginia\", \"city\": \"Boydton\", \"zip\": \"23917\", \"latitude\": 36.64046859741211, \"longitude\": -78.26995086669922, \"location\": {\"geoname_id\": null, \"capital\": \"Washington D.C.\" }}";
-            
-           //var response = "{\"success\": false,\"error\": {\"code\": 104,\"type\": \"monthly_limit_reached\",\"info\": \"Your monthly API request volume has been reached. Please upgrade your plan.\"}}";
+           var response = await GetIPStackResponseAsync(ip);
 
            try
-            {
-                var result = JsonConvert.DeserializeObject<GeolocationDto>(response);
-                return _mapper.Map<GeolocationModel>(result);
-            }
-            catch (Exception e)
-            {
-                try
-                {
-                    var result = JsonConvert.DeserializeObject<IPStackErrorResponseDto>(response);
-                }
-                catch (Exception exception)
-                {
-                    throw new InfrastructureException(ip, InfrastructureErrorCode.IPStackUnavailable);
-                }
+           {
+               var result = JsonConvert.DeserializeObject<GeolocationDto>(response);
+               return _mapper.Map<GeolocationModel>(result);
+           }
+           catch (Exception e)
+           {
+               try
+               {
+                   var result = JsonConvert.DeserializeObject<IPStackErrorResponseDto>(response);
+               }
+               catch (Exception exception)
+               {
+                   throw new InfrastructureException(ip, InfrastructureErrorCode.IPStackUnavailable);
+               }
                 
-                throw new InfrastructureException(ip, InfrastructureErrorCode.IPStackResponseError);
-            }
-            
-            //_logger.Error($"[ERR] Request of sending item was failed. Request: {json} Response: {response}");
+               throw new InfrastructureException(ip, InfrastructureErrorCode.IPStackResponseError);
+           }
         }
 
         public async Task<string> GetIPStackResponseAsync(string ip)

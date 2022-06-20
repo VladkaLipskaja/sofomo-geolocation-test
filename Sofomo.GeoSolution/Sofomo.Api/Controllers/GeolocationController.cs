@@ -43,6 +43,14 @@ namespace Sofomo.Api
             {
                 return this.JsonApi(exception);
             }
+            catch (InfrastructureException exception)
+            {
+                return this.JsonApi(exception);
+            }
+            catch (Exception exception)
+            {
+                return this.JsonApi(exception);
+            }
         }
 
         [HttpGet("{ip}")]
@@ -57,7 +65,15 @@ namespace Sofomo.Api
                 };
                 return this.JsonApi(response);
             }
+            catch (GeolocationException exception)
+            {
+                return this.JsonApi(exception);
+            }
             catch (AddressException exception)
+            {
+                return this.JsonApi(exception);
+            }
+            catch (InfrastructureException exception)
             {
                 return this.JsonApi(exception);
             }
@@ -80,6 +96,10 @@ namespace Sofomo.Api
                 return this.JsonApi(exception);
             }
             catch (AddressException exception)
+            {
+                return this.JsonApi(exception);
+            }
+            catch (InfrastructureException exception)
             {
                 return this.JsonApi(exception);
             }

@@ -1,5 +1,4 @@
-﻿using System.Text.Json.Serialization;
-using AutoMapper;
+﻿using AutoMapper;
 using Sofomo.Entities;
 using Sofomo.Models;
 using Sofomo.Network;
@@ -48,7 +47,7 @@ namespace Sofomo.Services
 
             entity = _mapper.Map<GeolocationEntity>(model);
 
-            await _geolocationRepository.AddAsync(entity);
+            entity = await _geolocationRepository.AddAsync(entity);
 
             return _mapper.Map<GeolocationDto>(entity);
         }
